@@ -1,0 +1,51 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    struct node *left;
+    int data ;
+    struct node *right;
+};
+
+
+int totalnode(struct node* n)
+{
+    if(n==NULL)
+    return(0);
+    
+    else{
+        if(n->left==NULL && n->right==NULL)
+        return(1);
+        
+        else{
+           return  1+ totalnode(n->left)+ totalnode(n->right);
+        
+        }
+    }
+}
+
+struct node* newnode(int data)
+{
+    struct node* node = (struct node*)malloc(sizeof(struct node));
+    node->data = data;
+    node->left = NULL;
+    node->right= NULL;
+    return(node);
+}
+ int main()
+ {
+     struct node *root =newnode(1);
+     root->left = newnode(2);
+     root->right = newnode(3);
+     root->left->left = newnode(4);
+     root->left->right = newnode(5);
+     root->right->right=newnode(6);
+     root->left->right->right = newnode(7);
+     
+     printf("total no of node\n");
+     printf("%d", totalnode(root));
+     
+     return(0);
+ }
+
